@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import "./App.css";
+import "./App.scss";
 import Header from "./components/header/header.component";
-import RestaurantsList from "./components/restaurants-list/restaurants-list.component";
+import RestaurantsListContainer from "./components/restaurants-list/restaurants-list.container";
 import { fetchRestaurantsListStart } from "./redux/restaurant/restaurant.actions";
 import { RestaurantActionTypes } from "./redux/restaurant/restaurant.types";
 
@@ -19,7 +19,7 @@ const App: React.FC<IAppProps> = ({ fetchRestaurantsListStart }) => {
   return (
     <div className='App container'>
       <Header />
-      <RestaurantsList />
+      <RestaurantsListContainer />
     </div>
   );
 };

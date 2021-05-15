@@ -1,0 +1,33 @@
+@import "../../styles/layout";
+
+.restaurant-card {
+  max-width: 368px;
+  border: none;
+
+  &__img {
+    border-radius: $rounded-xl;
+  }
+
+  &__review {
+    display: flex;
+    gap: 4px;
+    margin-bottom: -14px;
+
+    &__star {
+      margin-right: 4px;
+    }
+
+    &__count {
+      font-weight: normal;
+    }
+  }
+
+  &__price {
+    font-weight: normal;
+    font-size: $lg-font-size;
+  }
+
+  &__promoted {
+    font-weight: 200;
+  }
+}
