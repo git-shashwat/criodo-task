@@ -3,6 +3,7 @@ import {
   selectCostSort,
   selectCuisineFilter,
   selectRatingSort,
+  selectTextFilter,
 } from "../filters/filters.selectors";
 import { ESortOrder } from "../filters/filters.types";
 import { RootState } from "../root/root.reducer";
@@ -10,6 +11,7 @@ import { RestaurantState } from "./restaurant.types";
 import {
   cuisineListGenerator,
   filterListByCuisine,
+  filterListByText,
   reorderRestaurantsByPromotionFlag,
 } from "./restaurant.utils";
 
@@ -17,15 +19,23 @@ export const selectRestaurant = (state: RootState): RestaurantState =>
   state.restaurant;
 
 export const selectRestaurantsList = createSelector(
-  [selectRestaurant, selectCuisineFilter, selectRatingSort, selectCostSort],
-  (restaurant, cuisineFilter, ratingSort, costSort) => {
+  [
+    selectRestaurant,
+    selectCuisineFilter,
+    selectRatingSort,
+    selectCostSort,
+    selectTextFilter,
+  ],
+  (restaurant, cuisineFilter, ratingSort, costSort, text) => {
     let result = reorderRestaurantsByPromotionFlag(
       restaurant.restaurantsList!,
       ratingSort,
       costSort
     );
     if (cuisineFilter.length > 0)
-      return filterListByCuisine(result, cuisineFilter) || [];
+      result = filterListByCuisine(result, cuisineFilter);
+    console.log(text);
+    result = filterListByText(result, text);
     return result || [];
   }
 );

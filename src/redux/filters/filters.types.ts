@@ -1,3 +1,4 @@
+// ENUMS
 export enum EToSet {
   Unset,
   Set,
@@ -13,12 +14,14 @@ export interface FilterState {
   cuisine: string[];
   sortByRating: ESortOrder | null;
   sortByCost: ESortOrder | null;
+  text: string;
 }
 
 // ACTION TYPES
 export const SET_CUISINE_FILTER = "SET_CUISINE_FILTER";
 export const SET_SORT_BY_RATING = "SET_SORT_BY_RATING";
 export const SET_SORT_BY_COST = "SET_SORT_BY_COST";
+export const SET_TEXT_FILTER = "SET_TEXT_FILTER";
 
 // ACTION INTERFACES
 interface ISetCuisineFilter {
@@ -39,7 +42,13 @@ interface ISetSortByCost {
   payload: ESortOrder;
 }
 
+interface ISetTextFilter {
+  type: typeof SET_TEXT_FILTER;
+  payload: string;
+}
+
 export type FilterActionTypes =
   | ISetCuisineFilter
   | ISetSortByRating
-  | ISetSortByCost;
+  | ISetSortByCost
+  | ISetTextFilter;

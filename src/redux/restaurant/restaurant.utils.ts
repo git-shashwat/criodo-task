@@ -71,3 +71,16 @@ export const filterListByCuisine = (
   }
   return [];
 };
+
+export const filterListByText = (
+  restaurantsList: TRestaurant[],
+  text: string
+) => {
+  if (text && text.length > 0)
+    return restaurantsList.filter(
+      (restaurant) =>
+        restaurant.meta.title.toLowerCase().includes(text.toLowerCase()) ||
+        restaurant.meta.cuisines.toLowerCase().includes(text.toLowerCase())
+    );
+  return restaurantsList;
+};

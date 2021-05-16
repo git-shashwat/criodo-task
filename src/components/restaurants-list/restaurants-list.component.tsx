@@ -14,12 +14,15 @@ const RestaurantsList: React.FC<IRestaurantsListProps> = ({
   return (
     <div className='restaurant-list__container'>
       <h1>Crio Restaurants</h1>
-      <div className='restaurant-list'>
-        {" "}
-        {restaurantsList.map(({ id, ...rest }) => (
-          <RestaurantCard key={id} {...rest} />
-        ))}
-      </div>
+      {restaurantsList.length > 0 ? (
+        <div className='restaurant-list'>
+          {restaurantsList.map(({ id, ...rest }) => (
+            <RestaurantCard key={id} {...rest} />
+          ))}
+        </div>
+      ) : (
+        <p>No matching results found</p>
+      )}
     </div>
   );
 };

@@ -15,11 +15,13 @@ import {
   setCuisineFilter,
   setSortByCost,
   setSortByRating,
+  setTextFilter,
 } from "../../redux/filters/filters.actions";
 import {
   selectCostSort,
   selectCuisineFilter,
   selectRatingSort,
+  selectTextFilter,
 } from "../../redux/filters/filters.selectors";
 import { ESortOrder, EToSet } from "../../redux/filters/filters.types";
 import { selectCuisines } from "../../redux/restaurant/restaurant.selectors";
@@ -31,12 +33,14 @@ import { IHeaderProps, IHeaderSelection } from "./header.types";
 
 const Header: React.FC<IHeaderProps> = ({
   cuisineList,
-  setCuisineFilter,
-  setSortByRating,
-  setSortByCost,
   ratingSortOrder,
   costSortOrder,
   cuisineFilter,
+  textFilter,
+  setCuisineFilter,
+  setSortByRating,
+  setSortByCost,
+  setTextFilter,
 }) => {
   const handleCuisineFilterChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
@@ -44,6 +48,10 @@ const Header: React.FC<IHeaderProps> = ({
     } else {
       setCuisineFilter(e.currentTarget.value, EToSet.Unset);
     }
+  };
+
+  const handleTextChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setTextFilter(e.currentTarget.value);
   };
 
   return (
@@ -123,6 +131,8 @@ const Header: React.FC<IHeaderProps> = ({
           name='search-text'
           id='search-text'
           placeholder='search by name or cuisine'
+          value={textFilter}
+          onChange={handleTextChange}
         />
       </FormGroup>
     </header>
@@ -134,6 +144,7 @@ const mapStateToProps = createStructuredSelector<RootState, IHeaderSelection>({
   ratingSortOrder: selectRatingSort,
   costSortOrder: selectCostSort,
   cuisineFilter: selectCuisineFilter,
+  textFilter: selectTextFilter,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -146,6 +157,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
     ),
   setSortByRating: (order: ESortOrder) => dispatch(setSortByRating(order)),
   setSortByCost: (order: ESortOrder) => dispatch(setSortByCost(order)),
+  setTextFilter: (text: string) => dispatch(setTextFilter(text)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

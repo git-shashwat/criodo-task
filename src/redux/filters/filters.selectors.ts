@@ -18,3 +18,8 @@ export const selectCostSort = createSelector(
   selectFilter,
   (filter) => filter.sortByCost
 );
+
+export const selectTextFilter = createSelector(
+  selectFilter,
+  (filter) => filter.text
+);
