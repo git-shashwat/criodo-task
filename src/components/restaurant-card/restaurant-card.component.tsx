@@ -6,8 +6,6 @@ import {
   CardSubtitle,
   CardText,
   CardTitle,
-  Col,
-  Row,
 } from "reactstrap";
 import { BsDot } from "react-icons/bs";
 import { TRestaurant } from "../../redux/restaurant/restaurant.types";

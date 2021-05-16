@@ -1,15 +1,32 @@
 import { createSelector } from "reselect";
+import { selectCuisineFilter } from "../filters/filters.selectors";
 import { RootState } from "../root/root.reducer";
 import { RestaurantState } from "./restaurant.types";
-import { reorderRestaurantsByPromotionFlag } from "./restaurant.utils";
+import {
+  cuisineListGenerator,
+  filterListByCuisine,
+  reorderRestaurantsByPromotionFlag,
+} from "./restaurant.utils";
 
 export const selectRestaurant = (state: RootState): RestaurantState =>
   state.restaurant;
 
 export const selectRestaurantsList = createSelector(
+  [selectRestaurant, selectCuisineFilter],
+  (restaurant, cuisineFilter) => {
+    if (cuisineFilter.length > 0)
+      return (
+        reorderRestaurantsByPromotionFlag(
+          filterListByCuisine(restaurant.restaurantsList!, cuisineFilter)
+        ) || []
+      );
+    return reorderRestaurantsByPromotionFlag(restaurant.restaurantsList!) || [];
+  }
+);
+
+export const selectCuisines = createSelector(
   selectRestaurant,
-  (restaurant) =>
-    reorderRestaurantsByPromotionFlag(restaurant.restaurantsList!) || []
+  (restaurant) => cuisineListGenerator(restaurant.restaurantsList!) || []
 );
 
 export const selectIsRestaurantsListFetching = createSelector(

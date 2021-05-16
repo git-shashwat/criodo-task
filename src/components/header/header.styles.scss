@@ -6,4 +6,12 @@
   padding: 16px 0;
   gap: $lg-padding;
   width: 100%;
+
+  &__cuisine-filter {
+    margin-left: 1rem;
+  }
+
+  &__rating-sort {
+    margin-left: 1rem;
+  }
 }

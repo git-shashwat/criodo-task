@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  ButtonDropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-} from "reactstrap";
+import { ButtonDropdown, DropdownToggle } from "reactstrap";
 import { FiChevronDown } from "react-icons/fi";
 
 import "./dropdown-button.styles.scss";
@@ -14,6 +9,7 @@ const DropdownButton: React.FC<IDropdownButtonProps> = ({
   title,
   icon,
   isCaretVisible,
+  children,
 }) => {
   const [dropdownOpen, setOpen] = useState(false);
 
@@ -28,13 +24,7 @@ const DropdownButton: React.FC<IDropdownButtonProps> = ({
           {title}
           {isCaretVisible === undefined && <FiChevronDown />}
         </DropdownToggle>
-        <DropdownMenu>
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem disabled>Action</DropdownItem>
-          <DropdownItem>Another Action</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Another Action</DropdownItem>
-        </DropdownMenu>
+        {children}
       </ButtonDropdown>
     </>
   );

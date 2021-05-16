@@ -5,14 +5,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "./redux/store/store";
-
-// TODO Add persistgate later
+import { persistor, store } from "./redux/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const jsx = (
   <React.StrictMode>
     <Provider store={store}>
+      {/* <PersistGate persistor={persistor}> */}
       <App />
+      {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>
 );
