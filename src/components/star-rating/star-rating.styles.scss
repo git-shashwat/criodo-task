@@ -1,4 +1,16 @@
+@import "../../styles/layout";
+
 .star-rating {
   display: flex;
   gap: 4px;
+
+  &__wrapper {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px;
+    border-radius: $rounded;
+    color: white;
+  }
 }

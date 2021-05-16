@@ -12,10 +12,14 @@ const RestaurantsList: React.FC<IRestaurantsListProps> = ({
   restaurantsList,
 }) => {
   return (
-    <div className='restaurant-list'>
-      {restaurantsList.map(({ id, ...rest }) => (
-        <RestaurantCard key={id} {...rest} />
-      ))}
+    <div className='restaurant-list__container'>
+      <h1>Crio Restaurants</h1>
+      <div className='restaurant-list'>
+        {" "}
+        {restaurantsList.map(({ id, ...rest }) => (
+          <RestaurantCard key={id} {...rest} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 @import "../../styles/layout";
 
 .restaurant-card {
-  max-width: 368px;
+  max-width: 400px;
   border: none;
 
   &__img {
@@ -19,11 +19,23 @@
 
     &__count {
       font-weight: normal;
+      color: lighten($color: gray, $amount: 10) !important;
     }
   }
 
-  &__price {
+  &__cuisines {
+    margin: 0.5rem 0;
     font-weight: normal;
+    font-size: $lg-font-size;
+  }
+
+  &__footer {
+    display: flex;
+    gap: 4px;
+  }
+
+  &__price {
+    font-weight: 600;
     font-size: $lg-font-size;
   }
 
