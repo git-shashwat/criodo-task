@@ -1,4 +1,5 @@
 import React from "react";
+import Loader from "../loader/loader.component";
 
 interface ISpinnerProps {
   isLoading: boolean;
@@ -11,11 +12,7 @@ const WithSpinner = <P extends object>(
   WrappedComponent: React.ComponentType<P>
 ) => {
   const Spinner = ({ isLoading, ...rest }: ISpinnerProps) => {
-    return isLoading ? (
-      <div>loading...</div>
-    ) : (
-      <WrappedComponent {...(rest as P)} />
-    );
+    return isLoading ? <Loader /> : <WrappedComponent {...(rest as P)} />;
   };
 
   return Spinner;
