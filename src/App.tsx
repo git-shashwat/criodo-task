@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import "./App.scss";
+import Footer from "./components/footer/footer.component";
 import Header from "./components/header/header.component";
 import RestaurantsListContainer from "./components/restaurants-list/restaurants-list.container";
 import { fetchRestaurantsListStart } from "./redux/restaurant/restaurant.actions";
@@ -20,6 +21,7 @@ const App: React.FC<IAppProps> = ({ fetchRestaurantsListStart }) => {
     <div className='App container'>
       <Header />
       <RestaurantsListContainer />
+      <Footer />
     </div>
   );
 };
