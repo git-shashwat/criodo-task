@@ -5,7 +5,6 @@ import {
   selectRatingSort,
   selectTextFilter,
 } from "../filters/filters.selectors";
-import { ESortOrder } from "../filters/filters.types";
 import { RootState } from "../root/root.reducer";
 import { RestaurantState } from "./restaurant.types";
 import {

@@ -2,7 +2,6 @@ import React from "react";
 import { BiSliderAlt } from "react-icons/bi";
 import { connect } from "react-redux";
 import {
-  Button,
   DropdownItem,
   DropdownMenu,
   FormGroup,

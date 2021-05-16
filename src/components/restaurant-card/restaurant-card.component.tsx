@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "reactstrap";
 import { BsDot } from "react-icons/bs";
+import ReactTooltip from "react-tooltip";
 import { TRestaurant } from "../../redux/restaurant/restaurant.types";
 import StarRating from "../star-rating/star-rating.component";
 
@@ -30,6 +31,9 @@ const RestaurantCard: React.FC<Omit<TRestaurant, "id">> = ({
           cursor: `${isOpen ? "pointer" : ""}`,
           opacity: `${!isOpen ? "0.6" : "1"}`,
         }}
+        data-for='main'
+        data-tip={`Located in ${locality.title}`}
+        data-iscapture='true'
       >
         <CardImg
           top
@@ -76,6 +80,7 @@ const RestaurantCard: React.FC<Omit<TRestaurant, "id">> = ({
           </CardText>
         </CardBody>
       </Card>
+      <ReactTooltip id='main' place='right' type='dark' effect='solid' />
     </>
   );
 };

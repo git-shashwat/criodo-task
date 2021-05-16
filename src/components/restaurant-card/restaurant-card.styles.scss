@@ -3,6 +3,7 @@
 .restaurant-card {
   max-width: 400px;
   border: none;
+  transition: ease-in 250ms background-color;
 
   &__img {
     border-radius: $rounded-xl;
@@ -40,6 +41,10 @@
   }
 
   &__promoted {
-    font-weight: 200;
+    font-weight: 300;
+  }
+
+  &:hover {
+    background-color: lighten($color: lightpink, $amount: 10);
   }
 }
