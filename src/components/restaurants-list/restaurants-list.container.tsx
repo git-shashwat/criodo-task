@@ -15,7 +15,6 @@ const mapStateToProps = createStructuredSelector<
 });
 
 const RestaurantsListContainer: any = compose(
-  //FIXME Add appropriate type later
   connect(mapStateToProps),
   WithSpinner
 )(RestaurantsList);
