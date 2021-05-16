@@ -11,8 +11,17 @@ import {
 } from "reactstrap";
 import { Dispatch } from "redux";
 import { createStructuredSelector } from "reselect";
-import { setCuisineFilter } from "../../redux/filters/filters.actions";
-import { EToSet } from "../../redux/filters/filters.types";
+import {
+  setCuisineFilter,
+  setSortByCost,
+  setSortByRating,
+} from "../../redux/filters/filters.actions";
+import {
+  selectCostSort,
+  selectCuisineFilter,
+  selectRatingSort,
+} from "../../redux/filters/filters.selectors";
+import { ESortOrder, EToSet } from "../../redux/filters/filters.types";
 import { selectCuisines } from "../../redux/restaurant/restaurant.selectors";
 import { RootState } from "../../redux/root/root.reducer";
 import DropdownButton from "../dropdown-button/dropdown-button.component";
@@ -20,7 +29,15 @@ import DropdownButton from "../dropdown-button/dropdown-button.component";
 import "./header.styles.scss";
 import { IHeaderProps, IHeaderSelection } from "./header.types";
 
-const Header: React.FC<IHeaderProps> = ({ cuisineList, setCuisineFilter }) => {
+const Header: React.FC<IHeaderProps> = ({
+  cuisineList,
+  setCuisineFilter,
+  setSortByRating,
+  setSortByCost,
+  ratingSortOrder,
+  costSortOrder,
+  cuisineFilter,
+}) => {
   const handleCuisineFilterChange = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.currentTarget.checked) {
       setCuisineFilter(e.currentTarget.value, EToSet.Set);
@@ -46,6 +63,7 @@ const Header: React.FC<IHeaderProps> = ({ cuisineList, setCuisineFilter }) => {
                   <Input
                     type='checkbox'
                     onChange={handleCuisineFilterChange}
+                    checked={cuisineFilter.includes(cuisine)}
                     value={cuisine}
                   />
                   {cuisine}
@@ -58,14 +76,44 @@ const Header: React.FC<IHeaderProps> = ({ cuisineList, setCuisineFilter }) => {
       </DropdownButton>
       <DropdownButton title={"Rating"}>
         <DropdownMenu>
-          <DropdownItem>High to Low</DropdownItem>
-          <DropdownItem>Low to High</DropdownItem>
+          <DropdownItem
+            active={
+              ratingSortOrder === null ||
+              ratingSortOrder === ESortOrder.HighToLow
+            }
+            onClick={() => setSortByRating(ESortOrder.HighToLow)}
+          >
+            High to Low
+          </DropdownItem>
+          <DropdownItem
+            active={
+              ratingSortOrder !== null &&
+              ratingSortOrder === ESortOrder.LowToHigh
+            }
+            onClick={() => setSortByRating(ESortOrder.LowToHigh)}
+          >
+            Low to High
+          </DropdownItem>
         </DropdownMenu>
       </DropdownButton>
       <DropdownButton title={"Cost"}>
         <DropdownMenu>
-          <DropdownItem>High to Low</DropdownItem>
-          <DropdownItem>Low to High</DropdownItem>
+          <DropdownItem
+            active={
+              costSortOrder === null || costSortOrder === ESortOrder.LowToHigh
+            }
+            onClick={() => setSortByCost(ESortOrder.LowToHigh)}
+          >
+            Low to High
+          </DropdownItem>
+          <DropdownItem
+            active={
+              costSortOrder !== null && costSortOrder === ESortOrder.HighToLow
+            }
+            onClick={() => setSortByCost(ESortOrder.HighToLow)}
+          >
+            High to Low
+          </DropdownItem>
         </DropdownMenu>
       </DropdownButton>
       <FormGroup>
@@ -83,6 +131,9 @@ const Header: React.FC<IHeaderProps> = ({ cuisineList, setCuisineFilter }) => {
 
 const mapStateToProps = createStructuredSelector<RootState, IHeaderSelection>({
   cuisineList: selectCuisines,
+  ratingSortOrder: selectRatingSort,
+  costSortOrder: selectCostSort,
+  cuisineFilter: selectCuisineFilter,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
@@ -93,6 +144,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
         toSet,
       })
     ),
+  setSortByRating: (order: ESortOrder) => dispatch(setSortByRating(order)),
+  setSortByCost: (order: ESortOrder) => dispatch(setSortByCost(order)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

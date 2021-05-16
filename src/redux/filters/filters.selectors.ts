@@ -8,3 +8,13 @@ export const selectCuisineFilter = createSelector(
   selectFilter,
   (filter) => filter.cuisine
 );
+
+export const selectRatingSort = createSelector(
+  selectFilter,
+  (filter) => filter.sortByRating
+);
+
+export const selectCostSort = createSelector(
+  selectFilter,
+  (filter) => filter.sortByCost
+);

@@ -1,8 +1,34 @@
 import _ from "lodash";
+import { ESortOrder } from "../filters/filters.types";
 import { TRestaurant } from "./restaurant.types";
 
+export const sortRestaurants = (
+  restaurantsList: TRestaurant[],
+  ratingSort: ESortOrder | null,
+  costSort: ESortOrder | null
+) => {
+  if (ratingSort !== null) {
+    restaurantsList.sort((a, b) => {
+      if (ratingSort === ESortOrder.LowToHigh)
+        return a.userRating.aggregateRating - b.userRating.aggregateRating;
+      return b.userRating.aggregateRating - a.userRating.aggregateRating;
+    });
+  }
+  if (costSort !== null) {
+    restaurantsList.sort((a, b) => {
+      if (costSort === ESortOrder.LowToHigh)
+        return a.meta.averageCostForTwo - b.meta.averageCostForTwo;
+      return b.meta.averageCostForTwo - a.meta.averageCostForTwo;
+    });
+  }
+
+  return restaurantsList;
+};
+
 export const reorderRestaurantsByPromotionFlag = (
-  restaurantsList: TRestaurant[]
+  restaurantsList: TRestaurant[],
+  ratingSort: ESortOrder | null,
+  costSort: ESortOrder | null
 ) => {
   if (restaurantsList) {
     const promotedRestaurants = restaurantsList.filter(
@@ -12,7 +38,9 @@ export const reorderRestaurantsByPromotionFlag = (
       (restaurant) => !restaurant.meta.promoted
     );
 
-    return promotedRestaurants.concat(unpromotedRestaurants);
+    return sortRestaurants(promotedRestaurants, ratingSort, costSort).concat(
+      sortRestaurants(unpromotedRestaurants, ratingSort, costSort)
+    );
   }
   return [];
 };
