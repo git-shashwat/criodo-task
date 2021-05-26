@@ -33,7 +33,6 @@ export const selectRestaurantsList = createSelector(
     );
     if (cuisineFilter.length > 0)
       result = filterListByCuisine(result, cuisineFilter);
-    console.log(text);
     result = filterListByText(result, text);
     return result || [];
   }
